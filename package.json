@@ -19,7 +19,7 @@
         "languages": [{
             "id": "ca65",
             "aliases": ["6502/65816 Assembly", "ca65"],
-            "extensions": [".asm", ".s", ".S"],
+            "extensions": [".asm", ".s", ".S", ".inc"],
             "configuration": "./language-configuration.json"
         }],
         "grammars": [{
