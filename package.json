@@ -21,6 +21,54 @@
             "language": "ca65",
             "scopeName": "source.ca65",
             "path": "./syntaxes/ca65.tmLanguage.json"
+        }],
+        "problemMatchers": [{
+            "name": "ca65",
+            "owner": "ca65",
+            "fileLocation": "relative",
+            "pattern": [{
+                "regexp": "^(.+)\\((\\d+)\\):\\s+(Error|Warning|Note):\\s+(.+)$",
+                "file": 1,
+                "line": 2,
+                "severity": 3,
+                "message": 4
+            }]
+        }, {
+            "name": "ld65-unresolved",
+            "owner": "ca65",
+            "fileLocation": "relative",
+            "pattern": [{
+                "regexp": "(Unresolved external `(.*)') referenced in:\\s*$",
+                "message": 1,
+                "code": 2
+            }, {
+                "regexp": "\\s*(.*)\\((\\d+)\\)",
+                "file": 1,
+                "line": 2,
+                "loop": true
+            }]
+        }, {
+            "name": "ld65-config",
+            "owner": "ca65",
+            "fileLocation": "absolute",
+            "pattern": [{
+                "regexp": "^ld65: (.*?): ((.*\\.cfg)\\((\\d+)\\): )?(.*)$",
+                "severity": 1,
+                "file": 3,
+                "line": 4,
+                "message": 5                
+            }]
+        }, {
+            "name": "ld65",
+            "owner": "ca65",
+            "fileLocation": "relative",
+            "pattern": [{
+                "regexp": "^ld65: (.*?): ((.*)\\((\\d+)\\): )?(.*)$",
+                "severity": 1,
+                "file": 3,
+                "line": 4,
+                "message": 5                
+            }]
         }]
     }
 }
