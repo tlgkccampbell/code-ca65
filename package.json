@@ -1,0 +1,26 @@
+{
+    "name": "code-ca65",
+    "displayName": "ca65 Macro Assembler Language Support (6502/65816)",
+    "description": "Provides language support for the ca65 macro assembler.",
+    "version": "1.0.0",
+    "publisher": "tlgkccampbell",
+    "engines": {
+        "vscode": "^1.25.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "ca65",
+            "aliases": ["6502/65816 Assembly", "ca65"],
+            "extensions": [".asm", ".s", ".S"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "ca65",
+            "scopeName": "source.ca65",
+            "path": "./syntaxes/ca65.tmLanguage.json"
+        }]
+    }
+}
