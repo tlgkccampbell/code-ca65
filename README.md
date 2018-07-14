@@ -1,10 +1,10 @@
-# CA65 Extension for Visual Studio Code
+# ca65 Macro Assembler Language Support (6502/65816)
 
-This extension provides syntax highlighting and problem matchers for use with the ca65 6502/65816 Macro Assembler.
+This extension provides syntax highlighting and problem matchers for use with the [ca65 6502/65816 Macro Assembler](https://www.cc65.org/doc/ca65.html).
 
 ## Features
 
-All 6502, 65816, and variant opcodes are supported by the syntax highlighter, as well as all CA65 pseudovariables, control commands, operators, and literals.
+All 6502, 65816, and variant opcodes are supported by the syntax highlighter, as well as all ca65 pseudovariables, control commands, operators, and literals.
 
 ![Syntax Highlighting](images/highlighting.png)
 
@@ -18,7 +18,6 @@ Also provided are several problem matchers for parsing the results of compiling 
 You can use these problem matchers in `task.json` using the normal syntax:
 
 ```json
-
 {
     "version": "2.0.0",
     "tasks": [
