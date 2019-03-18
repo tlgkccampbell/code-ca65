@@ -10,7 +10,7 @@
         "url": "https://github.com/tlgkccampbell/code-ca65"
     },
     "engines": {
-		"vscode": "^1.32.0"
+        "vscode": "^1.32.0"
     },
     "categories": [
         "Programming Languages"
@@ -18,7 +18,7 @@
     "activationEvents": [
         "onLanguage:ca65"
     ],
-	"main": "./out/extension.js",
+    "main": "./out/extension.js",
     "contributes": {
         "languages": [
             {
@@ -118,16 +118,16 @@
             }
         ]
     },
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install"
-	},
-	"devDependencies": {
-		"typescript": "^3.3.1",
-		"vscode": "^1.1.28",
-		"tslint": "^5.12.1",
-		"@types/node": "^10.12.21"
-	}    
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+        "typescript": "^3.3.1",
+        "vscode": "^1.1.28",
+        "tslint": "^5.12.1",
+        "@types/node": "^10.12.21"
+    }
 }
