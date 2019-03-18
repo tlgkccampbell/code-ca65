@@ -9,6 +9,7 @@
         "type": "git",
         "url": "https://github.com/tlgkccampbell/code-ca65"
     },
+    "license": "MIT",
     "engines": {
         "vscode": "^1.32.0"
     },
