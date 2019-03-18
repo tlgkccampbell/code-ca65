@@ -8,14 +8,17 @@ All 6502, 65816, and variant opcodes are supported by the syntax highlighter, as
 
 ![Syntax Highlighting](images/highlighting.png)
 
-Also provided are several problem matchers for parsing the results of compiling and linking assembly files:
+This extension automatically registers build tasks for 6502 and 65816 assembly files which invoke `cl65` on the file currently being edited. If you have one or more [memory map configuration
+files](https://www.cc65.org/doc/ld65-5.html) in your workspace folder with the `.cfg` extension, a task will be created for each of them in addition to the default task, which does not specify a configuration file.
+
+If you want to create custom build tasks, this extension contributes the following problem matchers:
 
 * `cl65`
 * `ld65`
 * `ld65-config`
 * `ld65-unresolved`
 
-You can use these problem matchers in `task.json` using the normal syntax:
+You can use these problem matchers in `task.json` using the normal syntax.
 
 ```json
 {
@@ -33,6 +36,10 @@ You can use these problem matchers in `task.json` using the normal syntax:
 ```
 
 ## Release Notes
+
+### 1.1.0
+
+Added autodetected build tasks.
 
 ### 1.0.0
 

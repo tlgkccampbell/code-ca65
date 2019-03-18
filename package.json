@@ -3,18 +3,22 @@
     "icon": "images/icon.png",
     "displayName": "ca65 Macro Assembler Language Support (6502/65816)",
     "description": "Provides language support for the ca65 macro assembler.",
-    "version": "1.0.4",
+    "version": "1.1.0",
     "publisher": "tlgkccampbell",
     "repository": {
         "type": "git",
         "url": "https://github.com/tlgkccampbell/code-ca65"
     },
     "engines": {
-        "vscode": "^1.25.0"
+		"vscode": "^1.32.0"
     },
     "categories": [
         "Programming Languages"
     ],
+    "activationEvents": [
+        "onLanguage:ca65"
+    ],
+	"main": "./out/extension.js",
     "contributes": {
         "languages": [
             {
@@ -43,7 +47,7 @@
             {
                 "name": "ca65",
                 "owner": "ca65",
-                "fileLocation": "relative",
+                "fileLocation": "absolute",
                 "pattern": [
                     {
                         "regexp": "^(.+)\\((\\d+)\\):\\s+(Error|Warning|Note):\\s+(.+)$",
@@ -57,7 +61,7 @@
             {
                 "name": "ld65-unresolved",
                 "owner": "ca65",
-                "fileLocation": "relative",
+                "fileLocation": "absolute",
                 "pattern": [
                     {
                         "regexp": "(Unresolved external `(.*)') referenced in:\\s*$",
@@ -89,7 +93,7 @@
             {
                 "name": "ld65",
                 "owner": "ca65",
-                "fileLocation": "relative",
+                "fileLocation": "absolute",
                 "pattern": [
                     {
                         "regexp": "^ld65: (.*?): ((.*)\\((\\d+)\\): )?(.*)$",
@@ -100,6 +104,32 @@
                     }
                 ]
             }
+        ],
+        "taskDefinitions": [
+            {
+                "type": "ca65",
+                "required": [],
+                "properties": {
+                    "config": {
+                        "type": "string",
+                        "description": "The path to the ld65 configuration file which defines the target system's memory map."
+                    }
+                }
+            }
         ]
-    }
+    },
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^3.3.1",
+		"vscode": "^1.1.28",
+		"tslint": "^5.12.1",
+		"@types/node": "^10.12.21",
+		"@types/mocha": "^2.2.42"
+	}    
 }
