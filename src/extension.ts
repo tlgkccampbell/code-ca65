@@ -6,8 +6,8 @@ import * as fs from 'fs';
 import * as util from 'util';
 
 let taskProvider: vscode.Disposable | undefined;
-let linkerConfigWatcher: vscode.FileSystemWatcher | undefined;
-let assemblyConfigWatcher: vscode.FileSystemWatcher | undefined;
+let ld65ConfigWatcher: vscode.FileSystemWatcher | undefined;
+let cl65ConfigWatcher: vscode.FileSystemWatcher | undefined;
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -17,15 +17,15 @@ export function activate(context: vscode.ExtensionContext) {
 
 		let ca65Promise: Thenable<vscode.Task[]> | undefined = undefined;
 
-		linkerConfigWatcher = vscode.workspace.createFileSystemWatcher("**/*.cfg");
-		linkerConfigWatcher.onDidChange(() => ca65Promise = undefined);
-		linkerConfigWatcher.onDidCreate(() => ca65Promise = undefined);
-		linkerConfigWatcher.onDidDelete(() => ca65Promise = undefined);
+		ld65ConfigWatcher = vscode.workspace.createFileSystemWatcher("**/*.cfg");
+		ld65ConfigWatcher.onDidChange(() => ca65Promise = undefined);
+		ld65ConfigWatcher.onDidCreate(() => ca65Promise = undefined);
+		ld65ConfigWatcher.onDidDelete(() => ca65Promise = undefined);
 
-		assemblyConfigWatcher = vscode.workspace.createFileSystemWatcher(path.join(workspaceRoot, "ca65config.json"));
-		assemblyConfigWatcher.onDidChange(() => ca65Promise = undefined);
-		assemblyConfigWatcher.onDidCreate(() => ca65Promise = undefined);
-		assemblyConfigWatcher.onDidDelete(() => ca65Promise = undefined);
+		cl65ConfigWatcher = vscode.workspace.createFileSystemWatcher(path.join(workspaceRoot, "cl65config.json"));
+		cl65ConfigWatcher.onDidChange(() => ca65Promise = undefined);
+		cl65ConfigWatcher.onDidCreate(() => ca65Promise = undefined);
+		cl65ConfigWatcher.onDidDelete(() => ca65Promise = undefined);
 
 		taskProvider = vscode.tasks.registerTaskProvider('ca65', {
 			provideTasks: () => {
@@ -44,11 +44,11 @@ export function activate(context: vscode.ExtensionContext) {
 
 // this method is called when your extension is deactivated
 export function deactivate() {
-	if (assemblyConfigWatcher) {
-		assemblyConfigWatcher.dispose();
+	if (cl65ConfigWatcher) {
+		cl65ConfigWatcher.dispose();
 	}
-	if (linkerConfigWatcher) {
-		linkerConfigWatcher.dispose();
+	if (ld65ConfigWatcher) {
+		ld65ConfigWatcher.dispose();
 	}
 	if (taskProvider) {
 		taskProvider.dispose();
@@ -59,19 +59,18 @@ interface AssemblerTaskDefinition extends vscode.TaskDefinition {
 	config: string | undefined;
 }
 
-interface AssemblerConfigurationDefinition {
-	verbose: boolean | undefined;
+interface AssemblerCL65ConfigurationDefinition {
+	input: string | undefined;
+	params: string | undefined;
 }
 
-function getAssemblerCommandLine(fileName: string, linkerConfig: string | undefined, assemblyConfig: AssemblerConfigurationDefinition | undefined): string {
-	let cli = `cl65 "${fileName}"`;
-	if (linkerConfig) {
-		cli += ` -C "${linkerConfig}"`;
+function getAssemblerCommandLine(fileName: string, ld65Config: string | undefined, cl65Config: AssemblerCL65ConfigurationDefinition | undefined): string {
+	let cli = `cl65 "${fileName}" `;
+	if (ld65Config) {
+		cli += `-C "${ld65Config}" `;
 	}
-	if (assemblyConfig) {
-		if (assemblyConfig.verbose || false) {
-			cli += ` --verbose`;
-		}
+	if (cl65Config && cl65Config.params) {
+		cli += cl65Config.params;
 	}
 	return cli;
 }
@@ -79,20 +78,26 @@ function getAssemblerCommandLine(fileName: string, linkerConfig: string | undefi
 async function getAssemblerTasks(): Promise<vscode.Task[]> {
 
 	let tasks: vscode.Task[] = [];
-	let assemblerConfig: AssemblerConfigurationDefinition | undefined = undefined;
+	let cl65Config: AssemblerCL65ConfigurationDefinition | undefined = undefined;
 
 	let editor = vscode.window.activeTextEditor;
 	if (editor && editor.document && editor.document.fileName) {
+
+		let input: string = editor.document.fileName;
 
 		if (vscode.workspace.rootPath) {
 
 			try
 			{
 				const readFile = util.promisify(fs.readFile);
-				const readFileData = await readFile(path.join(vscode.workspace.rootPath || "", "ca65config.json"), "utf-8");
-				assemblerConfig = JSON.parse(readFileData);
+				const readFileData = await readFile(path.join(vscode.workspace.rootPath || "", "cl65config.json"), "utf-8");
+				cl65Config = JSON.parse(readFileData);
 			}
 			catch (err) { }		
+
+			if (cl65Config && cl65Config.input) {
+				input = path.resolve(vscode.workspace.rootPath, cl65Config.input);
+			}
 
 			let cfgs = await vscode.workspace.findFiles("**/*.cfg");
 			for (let cfg of cfgs) {
@@ -100,7 +105,7 @@ async function getAssemblerTasks(): Promise<vscode.Task[]> {
 				let buildLinkerConfigFile = path.relative(vscode.workspace.rootPath, cfg.fsPath);
 				let buildTaskDef: AssemblerTaskDefinition = { type: "ca65", config: buildLinkerConfigFile };
 				let buildTask = new vscode.Task(buildTaskDef, vscode.TaskScope.Workspace, `Build with ${buildLinkerConfigFile}`, "ca65", 
-					new vscode.ShellExecution(getAssemblerCommandLine(editor.document.fileName, buildLinkerConfigFile, assemblerConfig)), [ "$ca65", "$ld65", "$ld65-unresolved", "$ld65-config" ]);
+					new vscode.ShellExecution(getAssemblerCommandLine(input, buildLinkerConfigFile, cl65Config)), [ "$ca65", "$ld65", "$ld65-unresolved", "$ld65-config" ]);
 				buildTask.group = vscode.TaskGroup.Build;
 	
 				tasks.push(buildTask);		
@@ -111,7 +116,7 @@ async function getAssemblerTasks(): Promise<vscode.Task[]> {
 
 		let buildTaskDef: AssemblerTaskDefinition = { type: "ca65", config: undefined };
 		let buildTask = new vscode.Task(buildTaskDef, vscode.TaskScope.Workspace, "Build without config", "ca65", 
-			new vscode.ShellExecution(getAssemblerCommandLine(editor.document.fileName, undefined, assemblerConfig)), [ "$ca65", "$ld65", "$ld65-unresolved", "$ld65-config" ]);
+			new vscode.ShellExecution(getAssemblerCommandLine(input, undefined, cl65Config)), [ "$ca65", "$ld65", "$ld65-unresolved", "$ld65-config" ]);
 		buildTask.group = vscode.TaskGroup.Build;
 
 		tasks.push(buildTask);		
