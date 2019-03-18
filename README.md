@@ -37,7 +37,7 @@ You can use these problem matchers in `task.json` using the normal syntax.
             "label": "ca65: Compile and Link Current File",
             "group": "build",
             "type": "shell",
-            "command": "cl65 ${relativeFile}",
+            "command": "cl65 ${file}",
             "problemMatcher": ["$ca65", "$ld65", "$ld65-config", "$ld65-unresolved"]
         }
     ]

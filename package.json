@@ -30,8 +30,7 @@
                 "extensions": [
                     ".asm",
                     ".s",
-                    ".S",
-                    ".inc"
+                    ".a65"
                 ],
                 "configuration": "./language-configuration.json"
             }
