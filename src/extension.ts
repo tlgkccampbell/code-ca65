@@ -102,10 +102,11 @@ async function getAssemblerTasks(): Promise<vscode.Task[]> {
 			let cfgs = await vscode.workspace.findFiles("**/*.cfg");
 			for (let cfg of cfgs) {
 	
-				let buildLinkerConfigFile = path.relative(vscode.workspace.rootPath, cfg.fsPath);
-				let buildTaskDef: AssemblerTaskDefinition = { type: "ca65", config: buildLinkerConfigFile };
-				let buildTask = new vscode.Task(buildTaskDef, vscode.TaskScope.Workspace, `Build with ${buildLinkerConfigFile}`, "ca65", 
-					new vscode.ShellExecution(getAssemblerCommandLine(input, buildLinkerConfigFile, cl65Config)), [ "$ca65", "$ld65", "$ld65-unresolved", "$ld65-config" ]);
+				let buildLinkerConfigFileRel = path.relative(vscode.workspace.rootPath, cfg.fsPath); 
+				let buildLinkerConfigFileAbs = path.resolve(cfg.fsPath);
+				let buildTaskDef: AssemblerTaskDefinition = { type: "ca65", config: buildLinkerConfigFileRel };
+				let buildTask = new vscode.Task(buildTaskDef, vscode.TaskScope.Workspace, `Build with ${buildLinkerConfigFileRel}`, "ca65", 
+					new vscode.ShellExecution(getAssemblerCommandLine(input, buildLinkerConfigFileAbs, cl65Config)), [ "$ca65", "$ld65", "$ld65-unresolved", "$ld65-config" ]);
 				buildTask.group = vscode.TaskGroup.Build;
 	
 				tasks.push(buildTask);		
