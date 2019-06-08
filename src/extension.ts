@@ -17,6 +17,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 		let ca65Promise: Thenable<vscode.Task[]> | undefined = undefined;
 
+		vscode.window.onDidChangeActiveTextEditor(() => ca65Promise = undefined);
+
 		ld65ConfigWatcher = vscode.workspace.createFileSystemWatcher("**/*.cfg");
 		ld65ConfigWatcher.onDidChange(() => ca65Promise = undefined);
 		ld65ConfigWatcher.onDidCreate(() => ca65Promise = undefined);
@@ -81,7 +83,7 @@ async function getAssemblerTasks(): Promise<vscode.Task[]> {
 	let cl65Config: AssemblerCL65ConfigurationDefinition | undefined = undefined;
 
 	let editor = vscode.window.activeTextEditor;
-	if (editor && editor.document && editor.document.fileName) {
+	if (editor && editor.document && editor.document.fileName && editor.document.languageId === "ca65") {
 
 		let input: string = editor.document.fileName;
 
