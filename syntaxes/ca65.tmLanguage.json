@@ -47,6 +47,11 @@
 			"patterns": [{
 				"name": "comment.line.ca65",
 				"match": ";.*$"
+			},
+			{
+				"name": "comment.block.ca65",
+				"begin": "\\/\\*",
+				"end": "\\*\\/"
 			}]
 		},
 		"punctuation": {
