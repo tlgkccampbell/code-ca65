@@ -146,7 +146,7 @@
 		"controlcommands": {
 			"patterns": [{
 				"name": "keyword.control.controlcommand.ca65",
-				"match": "\\.(?i:a16|a8|addr|align|asciiz|assert|autoimport|bankbytes|bss|byt|byte|case|charmap|code|condes|constructor|data|dbyt|debuginfo|define|def|defined|destructor|dword|else|elseif|end|endif|endrep|error|exitmac|exitmacro|export|exportzp|faraddr|feature|fileopt|fopt|forceimport|global|globalzp|hibytes|i16|i8|if|ifblank|ifconst|ifdef|ifnblank|ifndef|ifnref|ifp02|ifp816|ifpc02|ifpsc02|ifref|import|importzp|incbin|include|interruptor|linecont|list|listbytes|lobytes|local|localchar|macpack|org|out|p02|p816|pagelen|pagelength|pc02|popseg|psc02|pushseg|reloc|repeat|res|rodata|segment|setcpu|smart|sunplus|tag|warning|word|zeropage)\\b"
+				"match": "\\.(?i:a16|a8|addr|align|asciiz|assert|autoimport|bankbytes|bss|byt|byte|case|charmap|code|condes|constructor|data|dbyt|debuginfo|define|def|defined|destructor|dword|else|elseif|end|endif|endrep|endrepeat|error|exitmac|exitmacro|export|exportzp|faraddr|feature|fileopt|fopt|forceimport|global|globalzp|hibytes|i16|i8|if|ifblank|ifconst|ifdef|ifnblank|ifndef|ifnref|ifp02|ifp816|ifpc02|ifpsc02|ifref|import|importzp|incbin|include|interruptor|linecont|list|listbytes|lobytes|local|localchar|macpack|org|out|p02|p816|pagelen|pagelength|pc02|popseg|psc02|pushseg|reloc|repeat|res|rodata|segment|setcpu|smart|sunplus|tag|warning|word|zeropage)\\b"
 			}]
 		},
 		"blockstarts": {
