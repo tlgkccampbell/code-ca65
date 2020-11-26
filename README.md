@@ -46,6 +46,20 @@ You can use these problem matchers in `task.json` using the normal syntax.
 
 ## Release Notes
 
+### 1.2.2
+
+Added support for .inc files.
+
+### 1.2.1
+
+Added support for .fatal, .definedmacro, .undef, .undefine.
+
+### 1.2.0
+
+Added support for block comments.
+Added support for .endrepeat.
+Updated packages.
+
 ### 1.1.0
 
 Added autodetected build tasks.
@@ -54,3 +68,13 @@ Added support for cl65config.json.
 ### 1.0.0
 
 Initial release of code-ca65.
+
+## Building/Packing Instructions
+
+Make sure you have Node.js installed. Then run:
+
+```npm install -g vsce```
+
+You can use `vsce` to package the extension by running it within the repository directory:
+
+```vsce package```
