@@ -62,12 +62,22 @@ interface AssemblerTaskDefinition extends vscode.TaskDefinition {
 }
 
 interface AssemblerCL65ConfigurationDefinition {
+	executable: string | undefined;
 	input: string | undefined;
 	params: string | undefined;
 }
 
 function getAssemblerCommandLine(fileName: string, ld65Config: string | undefined, cl65Config: AssemblerCL65ConfigurationDefinition | undefined): string {
-	let cli = `cl65 "${fileName}" `;
+	let cli = "";
+	if (cl65Config && cl65Config.executable) {
+		cli = cl65Config.executable;
+	}
+	else {
+		cli = `cl65`;
+	}
+
+	cli += ` "${fileName}" `;
+
 	if (ld65Config) {
 		cli += `-C "${ld65Config}" `;
 	}

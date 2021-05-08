@@ -3,7 +3,7 @@
     "icon": "images/icon.png",
     "displayName": "ca65 Macro Assembler Language Support (6502/65816)",
     "description": "Provides language support for the ca65 macro assembler.",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "publisher": "tlgkccampbell",
     "repository": {
         "type": "git",
