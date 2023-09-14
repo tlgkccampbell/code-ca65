@@ -79,10 +79,10 @@ function getAssemblerCommandLine(fileName: string, ld65Config: string | undefine
 	cli += ` "${fileName}" `;
 
 	if (ld65Config) {
-		cli += `-C "${ld65Config}" `;
+		cli += ` -C "${ld65Config}" `;
 	}
 	if (cl65Config && cl65Config.params) {
-		cli += cl65Config.params;
+		cli += ` ${cl65Config.params} `;
 	}
 	return cli;
 }
