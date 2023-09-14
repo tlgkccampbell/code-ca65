@@ -47,6 +47,11 @@ You can use these problem matchers in `task.json` using the normal syntax.
 
 ## Release Notes
 
+### 1.2.4
+
+Fixed a bug preventing the char constants `'` and `\` from being parsed correctly.
+Fixed a bug relating to the ordering of the CLI options passed to `ca65`.
+
 ### 1.2.3
 
 Added support for the `executable` parameter in `cl65config.json`.
