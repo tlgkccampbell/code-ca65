@@ -88,12 +88,9 @@
 			}]
 		},
 		"chars": {
-			"name": "string.quoted.single.ca65",
-			"begin": "'",
-			"end": "'",
 			"patterns": [{
-				"name": "constant.character.escape.ca65",
-				"match": "\\\\."
+				"name": "string.quoted.single.ca65",
+				"match": "'.'"
 			}]
 		},
 		"operators": {
