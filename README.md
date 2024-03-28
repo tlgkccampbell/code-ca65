@@ -25,8 +25,6 @@ If you want to create custom build tasks, this extension contributes the followi
 
 * `cl65`
 * `ld65`
-* `ld65-config`
-* `ld65-unresolved`
 
 You can use these problem matchers in `task.json` using the normal syntax.
 
@@ -39,13 +37,17 @@ You can use these problem matchers in `task.json` using the normal syntax.
             "group": "build",
             "type": "shell",
             "command": "cl65 ${file}",
-            "problemMatcher": ["$ca65", "$ld65", "$ld65-config", "$ld65-unresolved"]
+            "problemMatcher": ["$ca65", "$ld65"]
         }
     ]
 }
 ```
 
 ## Release Notes
+
+### 1.2.5
+
+Reworked problem matchers.
 
 ### 1.2.4
 
