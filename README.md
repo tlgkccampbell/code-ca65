@@ -45,6 +45,11 @@ You can use these problem matchers in `task.json` using the normal syntax.
 
 ## Release Notes
 
+### 1.2.6
+
+Fixed a bug preventing comments from being recognized immediately following a blockstart.
+Updated tasks.json to remove references to unused problem matchers (thanks to @ianbestGV).
+
 ### 1.2.5
 
 Reworked problem matchers.
