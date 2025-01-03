@@ -150,8 +150,8 @@
 			"patterns": [{
 				"name": "keyword.control.block.ca65",
 				"contentName": "entity.name.function.ca65",
-				"begin": "\\.(?i:enum|macro|mac|proc|scope|struct)\\s*",
-				"end": "\\s"
+				"begin": "\\.(?i:enum|macro|mac|proc|scope|struct)",
+				"end": "\\b"
 			}]
 		},
 		"blockends": {
