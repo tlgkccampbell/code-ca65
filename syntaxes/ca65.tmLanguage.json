@@ -126,6 +126,10 @@
 				"comment": "65816 Opcode Aliases",
 				"name": "keyword.other.opcode.ca65.65816",
 				"match": "\\b(?i:bge|blt|cpa|dea|ina|swa|tad|tas|tda|tsa)\\b"
+			}, {
+				"comment": "HuC6280 Opcode Aliases",
+				"name": "keyword.other.opcode.ca65.huc8280",
+				"match": "\\b(?i:sxy|sax|say|cla|clx|cly|st0|st1|st2|tma|tam|tii|tst|tdd|tin|tia|tai|bsr|csl|csh|set)\\b"
 			}]
 		},
 		"pseudovars": {
