@@ -127,9 +127,13 @@
 				"name": "keyword.other.opcode.ca65.65816",
 				"match": "\\b(?i:bge|blt|cpa|dea|ina|swa|tad|tas|tda|tsa)\\b"
 			}, {
-				"comment": "HuC6280 Opcode Aliases",
-				"name": "keyword.other.opcode.ca65.huc8280",
+				"comment": "HuC6280 Opcodes",
+				"name": "keyword.other.opcode.ca65.huc6280",
 				"match": "\\b(?i:sxy|sax|say|cla|clx|cly|st0|st1|st2|tma|tam|tii|tst|tdd|tin|tia|tai|bsr|csl|csh|set)\\b"
+			}, {
+				"comment": "HuC6280 Opcode Aliases",
+				"name": "keyword.other.opcode.ca65.huc8280aliases",
+				"match": "\\b(?i:tam[0-7]|tma[0-7])\\b"
 			}]
 		},
 		"pseudovars": {
