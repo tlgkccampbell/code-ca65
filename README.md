@@ -45,6 +45,10 @@ You can use these problem matchers in `task.json` using the normal syntax.
 
 ## Release Notes
 
+### 1.2.7
+
+Added support for Hudson Soft HuC6280 opcodes.
+
 ### 1.2.6
 
 Fixed a bug preventing comments from being recognized immediately following a blockstart.
