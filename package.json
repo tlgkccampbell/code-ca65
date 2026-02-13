@@ -85,7 +85,12 @@
                     }
                 }
             }
-        ]
+        ],
+        "configurationDefaults": {
+            "[ca65]": {
+                "editor.colorDecorators": false
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
