@@ -66,13 +66,13 @@
 		"literals": {
 			"patterns": [{
 				"name": "constant.numeric.binary.ca65",
-				"match": "%[01]+(_[01]+)*\\b"	
+				"match": "%[01]+(_[01]*)*\\b"	
 			}, {
 				"name": "constant.numeric.hex.ca65",
-				"match": "(\\$[0-9A-Fa-f]+(_[0-9A-Fa-f]+)*\\b)|\\b([0-9A-Fa-f]+(_[0-9A-Fa-f]+)*h\\b)"
+				"match": "(\\$[0-9A-Fa-f]+(_[0-9A-Fa-f]*)*\\b)|\\b([0-9A-Fa-f]+(_[0-9A-Fa-f]*)*h\\b)"
 			}, {
 				"name": "constant.numeric.decimal.ca65",
-				"match": "\\b[0-9]+(_[0-9]+)*\\b"
+				"match": "\\b[0-9]+(_[0-9]*)*\\b"
 			}, {
 				"name": "constant.language.unnamed-label.ca65",
 				"match": ":-+|:\\++"
