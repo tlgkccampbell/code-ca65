@@ -45,6 +45,14 @@ You can use these problem matchers in `task.json` using the normal syntax.
 
 ## Release Notes
 
+### 1.2.9
+
+Added support for number literals with underlines when using `underline_in_numbers` feature.
+
+### 1.2.8
+
+Disables hex color decorators by default in 6502 source files.
+
 ### 1.2.7
 
 Added support for Hudson Soft HuC6280 opcodes.
